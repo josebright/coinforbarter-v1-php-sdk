@@ -1,0 +1,19 @@
+{
+    "name": "coinforbarter/coinforbarter-v1-php",
+    "description": "CoinForBarter v1 PHP Library",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Uchenna Bright Ugwumadu",
+            "email": "bright@coinforbarter.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "CoinForBarter\\V1\\": "src/"
+        }
+    },
+    "require": {}
+}
