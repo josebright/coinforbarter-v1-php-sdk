@@ -12,10 +12,10 @@ Integrate coinforbarter sdk.
 ```php
 <?php
 
-use Coinforbarter\V1;
+use Coinforbarter\V1\CoinForBarter;
 
 $coinforbarter = new CoinForBarter('publicKey', 'secretKey', 'encryptionKey');
-echo $coinforbarter->test();
+echo $coinforbarter->Misc->getCountries();
 ```
 
 ## Stay in touch

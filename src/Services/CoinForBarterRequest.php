@@ -1,12 +1,12 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace CoinForBarter\V1\Services;
 
 
 class CoinForBarterRequest
 {
 
-  private $url = 'http://127.0.0.1:8000/v1';
+  private $url = 'https://staging-api.coinforbarter.com/v1';
 
   function __construct(
     $publicKey,
@@ -33,14 +33,15 @@ class CoinForBarterRequest
       ];
       if ($useToken === false) {
         $headers = [
-          "Authorization: Bearer $this->secretKey"
+          "Authorization: Bearer $this->secretKey",
+          "Content-Type: text/json"
         ];
       }
       curl_setopt($request, CURLOPT_HTTPHEADER, $headers);
-      if ($method == 'delete') {
+      if ($method === 'delete') {
         curl_setopt($request, CURLOPT_CUSTOMREQUEST, "DELETE");
       }
-      if ($method == 'patch') {
+      if ($method === 'patch') {
         curl_setopt($request, CURLOPT_CUSTOMREQUEST, "PATCH");
       }
       if ($method === 'post') {
@@ -48,45 +49,53 @@ class CoinForBarterRequest
         curl_setopt(
           $request,
           CURLOPT_POSTFIELDS,
-          json_encode($body)
+          $body
         );
       }
       $response = curl_exec($request);
+      $statusCode = curl_getinfo($request, CURLINFO_HTTP_CODE);
       curl_close($request);
-      require "../types/response.types.php";
-      $status = $coinforbarter_status->success;
-      if ($request->status === 204) {
+      if ($statusCode === 401) {
         return [
           "data" => null,
-          "statusCode" => $statusCode,
-          "message" => '',
-          "status" => $status
+          "statusCode" => 401,
+          "message" => 'Invalid api key',
+          "status" => 'error'
         ];
       }
-      var_dump($response);
+      if ($statusCode === 204) {
+        return [
+          "data" => null,
+          "statusCode" => 204,
+          "message" => '',
+          "status" => 'success'
+        ];
+      }
+      $response = json_decode($response);
+      return $response;
       return [
-        "data" => $data,
+        "data" => $response->data,
         "statusCode" => $statusCode,
-        "message" => $message,
-        "status" => $status
+        "message" => $response->message,
+        "status" => $response->status
       ];
     } catch (Exception $e) {
-      $status =  $coinforbarter_status->error;
       if ($e->response->status && $e->response->data) {
         extract($e->response);
         return [
-          "data" => $data,
-          "statusCode" => $statusCode,
-          "message" => $message,
-          "status" => $status
+          "data" => $e->response->data,
+          "statusCode" => $e->response->status,
+          "message" => $e->response->message,
+          "status" => 'error'
         ];
       }
       return [
         "data" => null,
         "statusCode" => null,
         "message" => 'an error occurred',
-        "status" => $status
+        "status" => 'error'
       ];
+      return $e;
     }
   }
 

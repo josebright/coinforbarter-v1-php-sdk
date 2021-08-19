@@ -1,10 +1,10 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace CoinForBarter\V1\Lib;
 
 class PaymentPlan
 {
-  private $path = '/payment-plans';
+  private $path = '/payment-plans/';
   private $request;
 
   function __construct($request)
@@ -15,17 +15,12 @@ class PaymentPlan
   function misc(
   ) {
     $request = $this->request->call(
-      $this->path . '/misc',
+      $this->path . 'misc',
       'get',
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function create(
@@ -37,13 +32,7 @@ class PaymentPlan
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findAll(
@@ -56,13 +45,7 @@ class PaymentPlan
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -74,12 +57,7 @@ class PaymentPlan
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function update(
@@ -92,11 +70,6 @@ class PaymentPlan
       $body,
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }

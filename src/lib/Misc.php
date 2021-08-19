@@ -1,10 +1,10 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace CoinForBarter\V1\Lib;
 
 class Misc
 {
-  private $path = '/currencies';
+  private $path = '/currencies/';
   private $request;
 
   function __construct($request)
@@ -18,12 +18,7 @@ class Misc
       '/countries',
       'get',
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function getBalance(
@@ -34,12 +29,7 @@ class Misc
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function getCurrencies(
@@ -50,12 +40,6 @@ class Misc
       "$this->path" . $query_string,
       'get',
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }

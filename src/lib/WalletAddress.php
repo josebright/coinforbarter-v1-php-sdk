@@ -1,6 +1,6 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace Coinforbarter\V1;
 
 class WalletAddress
 {

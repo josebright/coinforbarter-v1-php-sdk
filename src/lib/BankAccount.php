@@ -1,10 +1,10 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace CoinForBarter\V1\Lib;
 
 class BankAccount
 {
-  private $path = '/bank-accounts';
+  private $path = '/bank-accounts/';
   private $request;
 
   function __construct($request)
@@ -16,18 +16,12 @@ class BankAccount
     $body
   ) {
     $request =  $this->request->call(
-      $this->path . '/account/name',
+      $this->path . 'account/name',
       'post',
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function create(
@@ -39,13 +33,7 @@ class BankAccount
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findAll(
@@ -58,13 +46,7 @@ class BankAccount
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -76,45 +58,30 @@ class BankAccount
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
-  function getBanks(
-    $countryCode
-  ) {
-    $request = $this->request->call(
-      $this->path . '/banks' . $countryCode,
-      'get',
-      [],
-      true,
-    );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
-  }
+  // function getBanks(
+  //   $countryCode
+  // ) {
+  //   $request = $this->request->call(
+  //     $this->path . 'banks/' . $countryCode,
+  //     'get',
+  //     [],
+  //     true,
+  //   );
+  //   return $request;
+  // }
 
-  function makePrimary(
-    $bankAccountId
-  ) {
-    $request = $this->request->call(
-      $this->path . '/primary' . $bankAccountId,
-      'get',
-      [],
-      true,
-    );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
-  }
+  // function makePrimary(
+  //   $bankAccountId
+  // ) {
+  //   $request = $this->request->call(
+  //     $this->path . 'primary/' . $bankAccountId,
+  //     'get',
+  //     [],
+  //     true,
+  //   );
+  //   return $request;
+  // }
 }

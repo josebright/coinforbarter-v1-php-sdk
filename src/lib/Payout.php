@@ -1,10 +1,10 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace CoinForBarter\V1\Lib;
 
 class Payout
 {
-  private $path = '/payouts';
+  private $path = '/payouts/';
   private $request;
 
   function __construct($request)
@@ -22,13 +22,7 @@ class Payout
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -40,11 +34,6 @@ class Payout
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }

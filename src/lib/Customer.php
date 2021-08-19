@@ -1,10 +1,10 @@
 <?php
 
-namespace Coinforbarter\Sdk;
+namespace CoinForBarter\V1\Lib;
 
 class Customer
 {
-  private $path = '/customers';
+  private $path = '/customers/';
   private $request;
 
   function __construct($request)
@@ -22,13 +22,7 @@ class Customer
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findAll(
@@ -41,13 +35,7 @@ class Customer
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -59,12 +47,7 @@ class Customer
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function update(
@@ -77,11 +60,6 @@ class Customer
       $body,
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }
