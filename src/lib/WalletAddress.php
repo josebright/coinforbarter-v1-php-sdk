@@ -1,6 +1,6 @@
 <?php
 
-namespace Coinforbarter\V1;
+namespace CoinForBarter\V1\Lib;
 
 class WalletAddress
 {
@@ -21,13 +21,7 @@ class WalletAddress
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findAll(
@@ -40,13 +34,7 @@ class WalletAddress
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -58,12 +46,7 @@ class WalletAddress
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function makePrimary(
@@ -75,11 +58,6 @@ class WalletAddress
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }

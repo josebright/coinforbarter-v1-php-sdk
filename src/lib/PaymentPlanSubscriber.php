@@ -1,6 +1,6 @@
 <?php
 
-namespace Coinforbarter\V1;
+namespace CoinForBarter\V1\Lib;
 
 class PaymentPlanSubscriber
 {
@@ -22,13 +22,7 @@ class PaymentPlanSubscriber
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findAll(
@@ -41,13 +35,7 @@ class PaymentPlanSubscriber
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -59,12 +47,7 @@ class PaymentPlanSubscriber
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function remove(
@@ -76,11 +59,6 @@ class PaymentPlanSubscriber
       $body,
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }

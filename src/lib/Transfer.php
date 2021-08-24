@@ -1,12 +1,12 @@
 <?php
 
-namespace Coinforbarter\V1;
+namespace CoinForBarter\V1\Lib;
 
 class Transfer
 {
-  private $path = '/transfers';
-  private $feePath = '/transfers/fee';
-  private $otpPath = '/transfers/otp';
+  private $path = '/transfers/';
+  private $feePath = '/transfers/fee/';
+  private $otpPath = '/transfers/otp/';
   private $request;
 
   function __construct($request)
@@ -23,13 +23,7 @@ class Transfer
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findAll(
@@ -42,13 +36,7 @@ class Transfer
       [],
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -60,12 +48,7 @@ class Transfer
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function getFee(
@@ -77,11 +60,6 @@ class Transfer
       $body,
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 }

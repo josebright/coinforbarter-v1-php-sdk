@@ -1,10 +1,10 @@
 <?php
 
-namespace Coinforbarter\V1;
+namespace CoinForBarter\V1\Lib;
 
 class Payment
 {
-  private $path = '/payments';
+  private $path = '/payments/';
   private $request;
 
   function __construct($request, $publicKey)
@@ -21,13 +21,7 @@ class Payment
       $body,
       true,
     );
-    var_dump($request);
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function findOne(
@@ -39,12 +33,7 @@ class Payment
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function setCurrency(
@@ -53,17 +42,12 @@ class Payment
     $network
   ) {
     $request = $this->request->call(
-      $this->path . $id . '/currency/set' . $currency . $network,
+      $this->path . $id . '/currency/set/' . $currency . $network,
       'patch',
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function cancel(
@@ -75,12 +59,7 @@ class Payment
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   function lockCurrency(
@@ -92,12 +71,7 @@ class Payment
       [],
       true,
     );
-    return [
-      "status" => $request->status,
-      "message" => $request->message,
-      "statusCode" => $request->statusCode,
-      "data" => $request->data,
-    ];
+    return $request;
   }
 
   // function getPaymentUpdates(
@@ -109,11 +83,6 @@ class Payment
   //     [],
   //     true,
   //   );
-  //   return [
-  //     "status" => $request->status,
-  //     "message" => $request->message,
-  //     "statusCode" => $request->statusCode,
-  //     "data" => $request->data,
-  //   ];
+  //   return $request;
   // }
 }
