@@ -1,6 +1,7 @@
 <?php
 
 namespace CoinForBarter\V1;
+
 use CoinForBarter\V1\Services\CoinForBarterRequest;
 use CoinForBarter\V1\Lib\Misc;
 use CoinForBarter\V1\Lib\Customer;
@@ -27,15 +28,15 @@ class CoinForBarter
     public $Misc;
     // public $Webhook;
     private  $Request;
-    public  $publicKey;
+    public  $public_key;
 
     function __construct(
-        $publicKey,
-        $secretKey,
+        $public_key,
+        $private_key,
         $encryptionKey
     ) {
-        $this->Request = new CoinForBarterRequest($publicKey, $secretKey);
-        $this->Payment = new Payment($this->Request, $publicKey);
+        $this->Request = new CoinForBarterRequest($public_key, $private_key);
+        $this->Payment = new Payment($this->Request, $public_key);
         $this->Payout = new Payout($this->Request);
         $this->Transfer = new Transfer($this->Request);
         $this->WalletAddress = new WalletAddress($this->Request);
@@ -47,5 +48,4 @@ class CoinForBarter
         $this->Misc = new Misc($this->Request);
         // $this->Webhook = new Webhook($encryptionKey);
     }
-
 }

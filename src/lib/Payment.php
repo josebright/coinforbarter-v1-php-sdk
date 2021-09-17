@@ -7,7 +7,7 @@ class Payment
   private $path = '/payments/';
   private $request;
 
-  function __construct($request, $publicKey)
+  function __construct($request, $public_key)
   {
     $this->request = $request;
   }

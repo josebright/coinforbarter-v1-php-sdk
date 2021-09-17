@@ -1,12 +1,17 @@
 {
     "name": "coinforbarter/coinforbarter-v1-php",
-    "description": "CoinForBarter v1 PHP Library",
+    "description": "CoinForBarter PHP Library - Integrate and Manage cryptocurrency payments for goods and services",
     "type": "project",
     "license": "MIT",
+    "repository": "https://github.com/josebright/coinforbarter-v1-php-sdk.git",
     "authors": [
         {
             "name": "Uchenna Bright Ugwumadu",
             "email": "bright@coinforbarter.com"
+        },
+        {
+            "name": "Nwachukwu, Kingsley Tochukwu",
+            "email": "tochukwu@coinforbarter.com"
         }
     ],
     "minimum-stability": "dev",
@@ -15,5 +20,47 @@
             "CoinForBarter\\V1\\": "src/"
         }
     },
-    "require": {}
+    "require": {
+        "guzzlehttp/guzzle": "7.4.x-dev"
+    },
+    "keywords": [
+        "bitcoin",
+        "payments",
+        "BTC",
+        "crypto currency",
+        "DOGE",
+        "API",
+        "React Crypto",
+        "CoinForBarter",
+        "Crypto Sdk",
+        "Naira",
+        "NGN",
+        "Dollar",
+        "USD",
+        "Bitcoin",
+        "BTC",
+        "Dogecoin",
+        "DOGE",
+        "Ethereum",
+        "ETH",
+        "TetherUS",
+        "USDT",
+        "Usd Coin",
+        "USDC",
+        "Busd",
+        "BUSD",
+        "Dai",
+        "DAI",
+        "Paxus Standard",
+        "PAX",
+        "Bitcoin Cash",
+        "BCH",
+        "Wrapped Bitcoin",
+        "WBTC",
+        "BTC",
+        "BEP20",
+        "ERC20",
+        "DOGECOIN",
+        "BCH"
+    ]
 }
