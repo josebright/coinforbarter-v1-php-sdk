@@ -4,7 +4,7 @@ namespace CoinForBarter\V1\Lib;
 
 class Customer
 {
-  private $path = '/customers/';
+  private $path = '/customers';
   private $request;
 
   function __construct($request)
@@ -26,7 +26,7 @@ class Customer
   }
 
   function findAll(
-    $query
+    $query = []
   ) {
     $query_string = $this->request->makeQueryString($query);
     $request =  $this->request->call(

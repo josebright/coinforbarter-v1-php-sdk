@@ -4,7 +4,6 @@ namespace CoinForBarter\V1\Lib;
 
 class Misc
 {
-  private $path = '/currencies/';
   private $request;
 
   function __construct($request)
@@ -12,8 +11,8 @@ class Misc
     $this->request = $request;
   }
 
-  function getCountries(
-  ) {
+  function getCountries()
+  {
     $request = $this->request->call(
       '/countries',
       'get',
@@ -21,8 +20,8 @@ class Misc
     return $request;
   }
 
-  function getBalance(
-  ) {
+  function getBalance()
+  {
     $request = $this->request->call(
       '/balances',
       'get',
@@ -32,12 +31,10 @@ class Misc
     return $request;
   }
 
-  function getCurrencies(
-    $query
-  ) {
-    $query_string = $this->request->makeQueryString($query);
+  function getCurrencies()
+  {
     $request =  $this->request->call(
-      "$this->path" . $query_string,
+      "/currencies",
       'get',
     );
     return $request;

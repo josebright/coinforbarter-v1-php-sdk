@@ -2,18 +2,20 @@
 
 namespace CoinForBarter\V1\Services;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class CoinForBarterRequest
 {
 
-  private $url = 'https://staging-api.coinforbarter.com/v1';
+  private $url = 'https://api.coinforbarter.com/';
 
   function __construct(
-    $publicKey,
-    $secretKey
+    $public_key,
+    $private_key
   ) {
-    $this->publicKey = $publicKey;
-    $this->secretKey = $secretKey;
+    $this->public_key = $public_key;
+    $this->private_key = $private_key;
   }
 
   function call(
@@ -23,46 +25,33 @@ class CoinForBarterRequest
     $useToken = false
   ) {
     try {
-      $request  = curl_init();
-      $url = $this->url . $path;
-      curl_setopt($request, CURLOPT_URL, $url);
-      curl_setopt($request, CURLOPT_RETURNTRANSFER, true);
+      $client = new Client([
+        'base_uri' => $this->url,
+        'timeout'  => 2.0,
+      ]);
       $headers = [
-        "Authorization: Bearer $this->secretKey",
-        "Content-Type: contentType",
+        "Authorization" => "Bearer $this->private_key",
       ];
       if ($useToken === false) {
-        $headers = [
-          "Authorization: Bearer $this->secretKey",
-          "Content-Type: text/json"
-        ];
+        $headers = [];
       }
-      curl_setopt($request, CURLOPT_HTTPHEADER, $headers);
+      $response = null;
       if ($method === 'delete') {
-        curl_setopt($request, CURLOPT_CUSTOMREQUEST, "DELETE");
+        $response = $client->request('DELETE', 'v1' . $path, ['headers' => $headers]);
+      }
+      if ($method === 'get') {
+        $response = $client->request('GET', 'v1' . $path, ['headers' => $headers]);
       }
       if ($method === 'patch') {
-        curl_setopt($request, CURLOPT_CUSTOMREQUEST, "PATCH");
+        $response = $client->request('PATCH', 'v1' . $path, ['json' => $body, 'headers' => $headers]);
       }
       if ($method === 'post') {
-        curl_setopt($request, CURLOPT_POST, 1);
-        curl_setopt(
-          $request,
-          CURLOPT_POSTFIELDS,
-          $body
-        );
+        $response = $client->request('POST', 'v1' . $path, ['json' => $body, "headers" => $headers]);
       }
-      $response = curl_exec($request);
-      $statusCode = curl_getinfo($request, CURLINFO_HTTP_CODE);
-      curl_close($request);
-      if ($statusCode === 401) {
-        return [
-          "data" => null,
-          "statusCode" => 401,
-          "message" => 'Invalid api key',
-          "status" => 'error'
-        ];
-      }
+
+      $statusCode = $response->getStatusCode();
+
+
       if ($statusCode === 204) {
         return [
           "data" => null,
@@ -71,33 +60,56 @@ class CoinForBarterRequest
           "status" => 'success'
         ];
       }
+
+      $response = $response->getBody();
+
+
       $response = json_decode($response);
-      return $response;
-      return [
-        "data" => $response->data,
-        "statusCode" => $statusCode,
-        "message" => $response->message,
-        "status" => $response->status
-      ];
-    } catch (Exception $e) {
-      if ($e->response->status && $e->response->data) {
-        extract($e->response);
+      if ($response) {
         return [
-          "data" => $e->response->data,
-          "statusCode" => $e->response->status,
-          "message" => $e->response->message,
+          "data" => $response->data ?? null,
+          "statusCode" => $statusCode,
+          "message" => $response->message,
+          "status" => $response->status ?? 'error'
+        ];
+      }
+      return [
+        "data" => null,
+        "statusCode" => $statusCode,
+        "message" => 'an error occurred, check your internet connection',
+        "status" =>  'error'
+      ];
+    } catch (RequestException $e) {
+      $statusCode = $e->getResponse()->getStatusCode();
+      $body = $e->getResponse()->getBody()->getContents();
+      $body = json_decode($body);
+      if ($statusCode) {
+        if ($statusCode === 401) {
+          return [
+            "data" => null,
+            "statusCode" => 401,
+            "message" => 'Invalid api key',
+            "status" => 'error'
+          ];
+        }
+        return [
+          "data" => $body->data ?? null,
+          "statusCode" => $statusCode,
+          "message" => $body->message,
           "status" => 'error'
         ];
       }
+
       return [
         "data" => null,
         "statusCode" => null,
         "message" => 'an error occurred',
         "status" => 'error'
       ];
-      return $e;
     }
   }
+
+
 
 
   function makeQueryString($query)

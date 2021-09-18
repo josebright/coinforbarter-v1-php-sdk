@@ -13,7 +13,7 @@ class Transaction
   }
 
   function findAll(
-    $query
+    $query = []
   ) {
     $query_string = $this->request->makeQueryString($query);
     $request =  $this->request->call(
